@@ -1,0 +1,6 @@
+*
+!.gitignore
+!.bashrc
+!.vimrc
+!.xinitrc
+!README.md
