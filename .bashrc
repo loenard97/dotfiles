@@ -6,15 +6,20 @@
 [[ $- != *i* ]] && return
 
 # aliases
+
+alias nv="nvim ."
+
 # alias ls='exa --icons'
 # alias la='exa -a --icons'
 # alias ll='exa -la --icons --git'
 # alias lt='exa -laT --icons --git'
-alias ls='ls --color=auto'
-alias la='ls -a --color=auto'
-alias ll='ls -la --color=auto'
+alias ols='ls'
+alias ls='minils'
+alias la='minils -a'
+alias ll='minils -la'
+alias lt='minils -ta'
 
-alias cat='bat'
+alias cat='minicat'
 alias grep='grep --color=auto'
 alias up='cd ..'
 

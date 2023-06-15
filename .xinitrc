@@ -34,5 +34,5 @@ while true; do
 done &
 
 picom &
-feh --bg-fill ~/Pictures/wallpaper/dracula_arch.png &
+feh --bg-fill ~/Pictures/wallpaper/neon_anime.jpg &
 exec ./.config/scripts/dwm_launcher.sh
