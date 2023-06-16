@@ -23,6 +23,11 @@ alias cat='minicat'
 alias grep='grep --color=auto'
 alias up='cd ..'
 
+setwal ()
+{
+    sh /home/dennis/.config/scripts/wallpaper.sh $1
+}
+
 exitstatus()
 {
 	if [[ $? == 0 ]]; then
@@ -47,3 +52,4 @@ fi
 
 # rust
 . "$HOME/.cargo/env"
+
