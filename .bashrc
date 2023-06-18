@@ -28,6 +28,14 @@ setwal ()
     sh /home/dennis/.config/scripts/wallpaper.sh $1
 }
 
+bm ()
+{
+    BMPATH=$(bookmark $1)
+    if [[ -n "$BMPATH" ]]; then
+        cd $BMPATH
+    fi
+}
+
 exitstatus()
 {
 	if [[ $? == 0 ]]; then
