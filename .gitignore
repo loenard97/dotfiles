@@ -3,8 +3,8 @@
 !.bashrc
 !.vimrc
 !.xinitrc
-!/.config/nvim
-!/.config/picom
-!/.config/rofi
-!/.config/scripts
+!/.config/nvim/*
+!/.config/picom/*
+!/.config/rofi/*
+!/.config/scripts/*
 !README.md
