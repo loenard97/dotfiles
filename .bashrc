@@ -8,6 +8,7 @@
 # aliases
 
 alias nv="nvim ."
+alias sv="source venv/bin/activate"
 
 # alias ls='exa --icons'
 # alias la='exa -a --icons'

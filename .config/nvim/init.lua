@@ -32,6 +32,10 @@ require('lazy').setup({
   -- Detect tabstop and shiftwidth automatically
   'tpope/vim-sleuth',
 
+  -- file tree
+  'nvim-tree/nvim-tree.lua',
+  'nvim-tree/nvim-web-devicons',
+
   -- lsp
   {
     'neovim/nvim-lspconfig',
@@ -85,13 +89,15 @@ require('lazy').setup({
       vim.cmd.colorscheme 'pywal'
     end,
   },
+  -- 'dylanaraps/wal.vim',
+  -- 'EdenEast/nightfox.nvim',
 
   -- status line
   {
     'nvim-lualine/lualine.nvim',
     opts = {
       options = {
-        icons_enabled = false,
+        icons_enabled = true,
         theme = 'pywal',
         component_separators = '|',
         section_separators = '',
@@ -149,11 +155,15 @@ vim.o.timeout = true
 vim.o.timeoutlen = 300
 vim.o.completeopt = 'menuone,noselect'
 vim.o.termguicolors = true
+vim.o.foldcolumn = '1'
 
 -- keymaps
 vim.keymap.set({ 'n', 'v' }, '<Space>', '<Nop>', { silent = true })
 vim.keymap.set('i', 'öö', '<Esc>')
 vim.keymap.set('n', '<leader>ef', ':Explore<CR>')
+vim.keymap.set('n', '<leader>tt', ':NvimTreeToggle<CR>')
+vim.keymap.set('n', '<leader>tr', ':NvimTreeFocus<CR>')
+vim.keymap.set('n', '<leader>bf', ':e#<CR>')
 vim.keymap.set('n', 'k', "v:count == 0 ? 'gk' : 'k'", { expr = true, silent = true })
 vim.keymap.set('n', 'j', "v:count == 0 ? 'gj' : 'j'", { expr = true, silent = true })
 
@@ -187,13 +197,13 @@ vim.keymap.set('n', '<leader><space>', require('telescope.builtin').buffers, { d
 --    winblend = 10,
 --    previewer = false,
 --  })
---end, { desc = '[/] Fuzzily search in current buffer' })
+-- end, { desc = '[/] Fuzzily search in current buffer' })
 vim.keymap.set('n', '<leader>gf', require('telescope.builtin').git_files, { desc = 'Search [G]it [F]iles' })
 vim.keymap.set('n', '<leader>sf', require('telescope.builtin').find_files, { desc = '[S]earch [F]iles' })
 vim.keymap.set('n', '<leader>sh', require('telescope.builtin').help_tags, { desc = '[S]earch [H]elp' })
 vim.keymap.set('n', '<leader>sw', require('telescope.builtin').grep_string, { desc = '[S]earch current [W]ord' })
 -- vim.keymap.set('n', '<leader>sg', require('telescope.builtin').live_grep, { desc = '[S]earch by [G]rep' })
---vim.keymap.set('n', '<leader>sd', require('telescope.builtin').diagnostics, { desc = '[S]earch [D]iagnostics' })
+-- vim.keymap.set('n', '<leader>sd', require('telescope.builtin').diagnostics, { desc = '[S]earch [D]iagnostics' })
 
 -- treesitter
 require('nvim-treesitter.configs').setup {
@@ -261,7 +271,7 @@ vim.keymap.set('n', ']d', vim.diagnostic.goto_next, { desc = 'Go to next diagnos
 vim.keymap.set('n', '<leader>e', vim.diagnostic.open_float, { desc = 'Open floating diagnostic message' })
 vim.keymap.set('n', '<leader>q', vim.diagnostic.setloclist, { desc = 'Open diagnostics list' })
 
---  lsp
+-- lsp
 local on_attach = function(_, bufnr)
   local nmap = function(keys, func, desc)
     if desc then
@@ -310,6 +320,24 @@ local servers = {
     },
   },
 }
+
+-- nvim-tree
+require('nvim-tree').setup({
+  sort_by = "case_insensitive",
+  view = {
+    width = 35,
+  },
+  renderer = {
+    group_empty = true,
+  },
+  filters = {
+    dotfiles = false,
+  },
+  git = {
+    ignore = false,
+  },
+})
+-- vim.cmd('hi NvimTreeVertSplit guibg=#ff0000 guifg=#00FF00')
 
 -- Setup neovim lua configuration
 require('neodev').setup()
