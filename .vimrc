@@ -24,6 +24,7 @@ set wildmode=longest,list   " get bash-like tab completions
 set mouse=a                 " enable mouse click
 set clipboard=unnamedplus   " using system clipboard
 set ttyfast                 " Speed up scrolling in Vim
+set scrolloff=999           " keep cursor centered
 " set cc=80                   " set an 80 column border for good coding style
 " set spell                 " enable spell check (may need to download language package)
 " set cursorline              " highlight current cursorline
@@ -37,7 +38,9 @@ augroup autosave
     autocmd FileType * autocmd TextChanged,InsertLeave <buffer> if &readonly == 0 | silent write | endif
 augroup END
 
-" move line or visually selected block - alt+j/k
+" move line or visually selected block - contorl+j/k
+nnoremap <C-j> :m .+1<CR>
+nnoremap <C-k> :m .-2<CR>
 inoremap <C-j> <Esc>:m .+1<CR>==gi
 inoremap <C-k> <Esc>:m .-2<CR>==gi
 vnoremap <C-j> :m '>+1<CR>gv=gv

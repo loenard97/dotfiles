@@ -14,3 +14,4 @@ vim.o.timeoutlen = 300
 vim.o.completeopt = 'menuone,noselect'
 vim.o.termguicolors = true
 vim.o.foldcolumn = '1'
+vim.o.scrolloff = 999
