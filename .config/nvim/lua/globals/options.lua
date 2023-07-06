@@ -15,3 +15,5 @@ vim.o.completeopt = 'menuone,noselect'
 vim.o.termguicolors = true
 vim.o.foldcolumn = '1'
 vim.o.scrolloff = 999
+vim.o.list = true
+vim.o.listchars = 'tab:──'

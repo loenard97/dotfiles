@@ -30,6 +30,8 @@ set scrolloff=999           " keep cursor centered
 " set cursorline              " highlight current cursorline
 " set noswapfile            " disable creating swap file
 " set backupdir=~/.cache/vim " Directory to store backup files.
+set list
+set listchars=tab:──
 
 " autosave
 augroup autosave
