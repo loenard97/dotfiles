@@ -7,4 +7,5 @@
 !/.config/picom/*
 !/.config/rofi/*
 !/.config/scripts/*
+!/Pictures/wallpaper/*
 !README.md
