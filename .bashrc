@@ -57,10 +57,14 @@ alias ocat='cat'
 alias gs='git status'
 alias ga='git add'
 alias gaa='git add --all'
-alias gc='git commit -m'
+# alias gc='git commit -m'
 alias gl='git log --oneline'
-alias gc='git switch -c'
+alias gb='git switch -c'
 alias gd='git diff'
+function gc()
+{
+    git commit -m $1
+}
 
 ## other
 alias nv="nvim ."
@@ -70,7 +74,7 @@ alias grep='grep --color=auto'
 alias dirs='du -h -d 1 | sort -h -r'
 
 # functions
-up()
+function up()
 {
     # default parameter to 1 if non provided
     declare -i d=${@:-1}
@@ -80,13 +84,13 @@ up()
     cd "$(pwd | sed -E 's;(/[^/]*){0,'$d'}$;;')/";
 }
 
-setwal ()
+function setwal()
 {
     # set wallpaper
     sh /home/dennis/.config/scripts/wallpaper.sh $1
 }
 
-bm ()
+function bm()
 {
     # bookmark
     BMPATH=$(bookmark $1)
@@ -95,7 +99,7 @@ bm ()
     fi
 }
 
-extract ()
+function extract()
 {
     # extract files
 	if [ -f $1 ] ; then
@@ -118,7 +122,7 @@ extract ()
   	fi
 }
 
-colors ()
+function colors()
 {
     # print color scheme
     # credit to manjaro: https://gitlab.manjaro.org/packages/core/bash/-/blob/master/dot.bashrc
@@ -149,7 +153,7 @@ colors ()
 }
 
 # PS
-exitstatus()
+function exitstatus()
 {
     # print exit status
 	if [[ $? == 0 ]]; then
@@ -159,7 +163,7 @@ exitstatus()
 	fi
 }
 
-git_branch ()
+function git_branch()
 {
     if [ -d .git ]; then
         printf "%s" "($(git branch 2> /dev/null | awk '/\*/{print $2}'))";
@@ -201,7 +205,7 @@ function git_diff()
     git diff --shortstat | sed 's/, /  /g' | sed 's/[[:alpha:]]//g'
 }
 
-rightprompt ()
+function rightprompt()
 {
     # nerd font cheat sheet
     # https://www.nerdfonts.com/cheat-sheet
@@ -216,8 +220,12 @@ rightprompt ()
 
 # PS1='
 #   \[\e[31m\]$(exitstatus)\[\e[1;34m\]\W\[\e[0m\]    '
-PS1='
+if [ $(echo $TERM) == 'xterm-kitty' ]; then
+    PS1='
 \[$(tput sc; rightprompt; tput rc)\]  \[\e[31m\]$(exitstatus)\[\e[1;34m\]\W\[\e[0m\]    '
+else
+    PS1='[\u@\h \W]\$ '
+fi
 
 
 # rust
