@@ -56,14 +56,17 @@ alias ocat='cat'
 ## git
 alias gs='git status'
 alias ga='git add'
-alias gaa='git add --all'
-# alias gc='git commit -m'
+alias gaa='git add --all && git status'
 alias gl='git log --oneline'
 alias gb='git switch -c'
 alias gd='git diff'
+alias gls='git ls-files'
 function gc()
 {
-    git commit -m $1
+    if [ "$#" -ne 1 ]; then
+        echo "commit message required" >&2
+    fi
+    git commit -m "$1"
 }
 
 ## other
