@@ -1,9 +1,12 @@
+#!/bin/bash
 #
 # ~/.bashrc
 #
 
 # If not running interactively, don't do anything
 [[ $- != *i* ]] && return
+
+source ~/.bash_aliases
 
 # options
 bind 'set completion-ignore-case on'
@@ -24,7 +27,6 @@ HISTCONTROL=ignoreboth
 HISTCONTROL=ignorespace
 export HISTIGNORE="&:ls:clear:[bf]g:exit"
 
-# ----- aliases -----
 # colors
 blk='\[\033[01;30m\]'   # Black
 red='\[\033[01;31m\]'   # Red
@@ -36,47 +38,45 @@ cyn='\[\033[01;36m\]'   # Cyan
 wht='\[\033[01;37m\]'   # White
 clr='\[\033[00m\]'      # Reset
 
-## ls
-alias els='exa --icons'
-alias ela='exa -a --icons'
-alias ell='exa -la --icons --git'
-alias elt='exa -laT --icons --git'
-alias ols='ls --color'
-alias ola='ls -a --color'
-alias oll='ls -l --color'
-alias ls='minils'
-alias la='minils -a'
-alias ll='minils -la'
-alias lt='minils -ta'
-
-## cat
-alias cat='minicat'
-alias ocat='cat'
-
-## git
-alias gs='git status'
-alias ga='git add'
-alias gaa='git add --all && git status'
-alias gl='git log --oneline'
-alias gb='git switch -c'
-alias gd='git diff'
-alias gls='git ls-files'
-function gc()
+# functions
+function __prompt_user_default()
 {
-    if [ "$#" -ne 1 ]; then
-        echo "commit message required" >&2
+    question=$1
+    default=$2
+
+    if [[ $default = true ]]; then
+        options="[Y/n]"
+        default="y"
+    else
+        options="[y/N]"
+        default="n"
     fi
-    git commit -m "$1"
+
+    read -p "$question $options " input
+    input=${input:-${default}}
+
+    if [[ $input =~ ^[yY]$ ]]; then
+        return 0
+    else
+        return 1
+    fi 
 }
 
-## other
-alias nv="nvim ."
-alias sv="source venv/bin/activate"
-alias md='mkdir -p -v'
-alias grep='grep --color=auto'
-alias dirs='du -h -d 1 | sort -h -r'
+function off()
+{
+    echo "Checking for updates before shutting down..."
+    n_updates=$(checkupdates | wc -l)
+    
+    if [[ $n_updates -ne "0" ]]; then
+        echo "$n_updates updates available"
+        __prompt_user_default "Do you want to upgrade?" true && sudo pacman -Syu
+    else
+        echo "Everything up to date"
+    fi
 
-# functions
+    __prompt_user_default "Do you want to shut down now?" true && shutdown now
+}
+
 function up()
 {
     # default parameter to 1 if non provided
@@ -105,24 +105,24 @@ function bm()
 function extract()
 {
     # extract files
-	if [ -f $1 ] ; then
-    	case $1 in
-        	*.tar.bz2)   tar xvjf $1    ;;
-          	*.tar.gz)    tar xvzf $1    ;;
-          	*.bz2)       bunzip2 $1     ;;
-          	*.rar)       unrar x $1     ;;
-          	*.gz)        gunzip $1      ;;
-          	*.tar)       tar xvf $1     ;;
-          	*.tbz2)      tar xvjf $1    ;;
-          	*.tgz)       tar xvzf $1    ;;
-          	*.zip)       unzip $1       ;;
-          	*.Z)         uncompress $1  ;;
-          	*.7z)        7z x $1        ;;
-          	*)           echo "Unknown file type: '$1'" ;;
-      	esac
-  	else
-      	echo "Not a valid file: '$1'"
-  	fi
+    if [ -f $1 ] ; then
+        case $1 in
+            *.tar.bz2)   tar xvjf $1    ;;
+            *.tar.gz)    tar xvzf $1    ;;
+            *.bz2)       bunzip2 $1     ;;
+            *.rar)       unrar x $1     ;;
+            *.gz)        gunzip $1      ;;
+            *.tar)       tar xvf $1     ;;
+            *.tbz2)      tar xvjf $1    ;;
+            *.tgz)       tar xvzf $1    ;;
+            *.zip)       unzip $1       ;;
+            *.Z)         uncompress $1  ;;
+            *.7z)        7z x $1        ;;
+            *)           echo "Unknown file type: '$1'" ;;
+        esac
+    else
+        echo "Not a valid file: '$1'"
+    fi
 }
 
 function colors()
@@ -159,11 +159,11 @@ function colors()
 function exitstatus()
 {
     # print exit status
-	if [[ $? == 0 ]]; then
-		echo ''
-	else
-		echo '   '
-	fi
+    if [[ $? == 0 ]]; then
+        echo ''
+    else
+        echo '   '
+    fi
 }
 
 function git_branch()
