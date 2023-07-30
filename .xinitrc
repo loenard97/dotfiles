@@ -27,13 +27,5 @@ if [ -d /etc/X11/xinit/xinitrc.d ] ; then
  	unset f
 fi
 
-# show time in statusbar
-while true; do
-	xsetroot -name "$(date '+%a %b %d %H:%M')  "
-	sleep 1m
-done &
-
-picom &
-# feh --bg-fill ~/Pictures/wallpaper/neon_anime.jpg &
 wal -R
-exec ./.config/scripts/dwm_launcher.sh
+exec i3
