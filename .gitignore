@@ -3,6 +3,7 @@
 !.bashrc
 !.vimrc
 !.xinitrc
+!/.config/packages/*
 !/.config/nvim/*
 !/.config/picom/*
 !/.config/rofi/*

@@ -17,7 +17,6 @@ set softtabstop=4               " see multiple spaces as tabstops so <BS> does t
 set expandtab                   " converts tabs to white space
 set shiftwidth=4                " width for autoindents
 set autoindent                  " indent a new line the same amount as the line just typed
-set number                      " add line numbers
 set wildmode=longest,list       " get bash-like tab completions
 set mouse=a                     " enable mouse click
 set clipboard=unnamedplus       " using system clipboard
