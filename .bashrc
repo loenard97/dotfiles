@@ -223,9 +223,10 @@ function rightprompt()
 
 # PS1='
 #   \[\e[31m\]$(exitstatus)\[\e[1;34m\]\W\[\e[0m\]    '
-if [ $(echo $TERM) == 'xterm-kitty' ]; then
-    PS1='
-\[$(tput sc; rightprompt; tput rc)\]  \[\e[31m\]$(exitstatus)\[\e[1;34m\]\W\[\e[0m\]    '
+if [ $(echo $TERM) == 'xterm-kitty' ] || [ $(echo $TERM) == 'tmux-256color' ]; then
+#     PS1='
+# \[$(tput sc; rightprompt; tput rc)\]  \[\e[31m\]$(exitstatus)\[\e[1;34m\]\W\[\e[0m\]    '
+    PS1='\[\e[31m\]$(exitstatus)\[\e[1;34m\]\W\[\e[0m\]    '
 else
     PS1='[\u@\h \W]\$ '
 fi
