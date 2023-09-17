@@ -3,21 +3,18 @@
 #
 
 ## ls
-alias els='exa --icons'
-alias ela='exa -a --icons'
-alias ell='exa -la --icons --git'
-alias elt='exa -laT --icons --git'
-alias ols='ls --color'
-alias ola='ls -a --color'
-alias oll='ls -l --color'
-alias ls='minils'
-alias la='minils -a'
-alias ll='minils -la'
-alias lt='minils -ta'
+alias ls='exa --icons'
+alias la='exa -a --icons'
+alias ll='exa -la --icons --git'
+alias lt='exa -laT --icons --git'
+alias mls='minils'
+alias mla='minils -a'
+alias mll='minils -la'
+alias mlt='minils -ta'
 
 ## cat
-alias cat='minicat'
-alias ocat='cat'
+alias cat='bat'
+alias mcat='minicat'
 
 ## git
 alias gs='git status'
@@ -37,8 +34,13 @@ function gc()
     git commit -m "$1"
 }
 
+## datatools
+alias h5="~/Projects/python/datatools/venv/bin/python ~/Projects/python/datatools/main.py"
+alias plot="~/Projects/python/plot-cli/venv/bin/python ~/Projects/python/plot-cli/main.py"
+
 ## other
-alias nv="nvim ."
+# alias nv="nvim ."
+alias nv='exec ~/.config/scripts/launch_nvim.sh'
 alias sv="source venv/bin/activate"
 alias md='mkdir -p -v'
 alias grep='grep --color=auto'

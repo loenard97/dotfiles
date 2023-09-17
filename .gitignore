@@ -1,6 +1,7 @@
 *
 !.gitignore
 !.bashrc
+!.tmux.config
 !.vimrc
 !.xinitrc
 !/.config/packages/*
