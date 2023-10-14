@@ -1,10 +1,10 @@
 #!/bin/bash
 
-SESSIONNAME="nvim"
+SESSIONNAME=$1
 tmux has-session -t $SESSIONNAME &>/dev/null
 
 if [ $? != 0 ]; then
-    tmux new-session -d -s $SESSIONNAME 'exec nvim .'
+    tmux new-session -d -s $SESSIONNAME 'nvim .'
     tmux rename-window $SESSIONNAME
     tmux select-window -t $SESSIONNAME:0
     tmux split-window -v

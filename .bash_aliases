@@ -40,7 +40,7 @@ alias plot="~/Projects/python/plot-cli/venv/bin/python ~/Projects/python/plot-cl
 
 ## other
 # alias nv="nvim ."
-alias nv='exec ~/.config/scripts/launch_nvim.sh'
+# alias nv='sh -e ~/.config/scripts/launch_nvim.sh'
 alias sv="source venv/bin/activate"
 alias md='mkdir -p -v'
 alias grep='grep --color=auto'

@@ -62,6 +62,20 @@ function __prompt_user_default()
     fi 
 }
 
+function nv()
+{
+    tmux has-session -t $1 &>/dev/null
+    if [ $? != 0 ]; then
+        tmux new-session -d -s $1 'nvim .'
+        tmux rename-window $1
+        tmux select-window -t $1:0
+        tmux split-window -v
+        tmux resize-pane -D 10
+        tmux select-pane -U
+    fi
+    tmux attach -t $1
+}
+
 function off()
 {
     echo "Checking for updates before shutting down..."
@@ -69,12 +83,14 @@ function off()
     
     if [[ $n_updates -ne "0" ]]; then
         echo "$n_updates updates available"
-        __prompt_user_default "Do you want to upgrade?" true && sudo pacman -Syu
+        # __prompt_user_default "Do you want to upgrade?" true && sudo pacman -Syu
+        sudo pacman -Syu
     else
         echo "Everything up to date"
     fi
 
-    __prompt_user_default "Do you want to shut down now?" true && shutdown now
+    # __prompt_user_default "Do you want to shut down now?" true && shutdown now
+    shutdown now
 }
 
 function up()
